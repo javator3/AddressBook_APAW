@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.sda.addressbook.view.PersonView;
 
 import static javafx.application.Application.launch;
 
@@ -17,12 +18,17 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/root.fxml"));
-        Parent root1 = FXMLLoader.load(getClass().getResource("/add.fxml"));
+        PersonView personView = new PersonView(primaryStage);
+        personView.loadView();
 
-        primaryStage.setScene(new Scene(root, 700, 400));
-        primaryStage.setScene(new Scene(root1, 700, 400));
-        primaryStage.show();
+
+
+
+
+
+
+
+
 
     }
 
