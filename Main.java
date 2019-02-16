@@ -18,8 +18,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("/root.fxml"));
+        Parent root1 = FXMLLoader.load(getClass().getResource("/add.fxml"));
 
         primaryStage.setScene(new Scene(root, 700, 400));
+        primaryStage.setScene(new Scene(root1, 700, 400));
         primaryStage.show();
 
     }
