@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.sda.addressbook.AddController;
 import pl.sda.addressbook.RootController;
 import pl.sda.addressbook.model.AddressData;
 
@@ -55,20 +56,25 @@ public class PersonView {
     }
 
 
-public void loadadd (){
+    public void loadadd (){
 
-    try {
-        Parent root1 = FXMLLoader.load(getClass().getResource("/add.fxml"));
-        stage.setScene(new Scene(root1, 700, 400));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/add.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent parent = loader.getRoot();
 
+        Stage personStage = new Stage();
+        personStage.setScene(new Scene(parent, 600, 400));
 
-    } catch (IOException e) {
-        e.printStackTrace();
+        personStage.show();
+
+        AddController addController = loader.getController();
+        addController.setPersonView1(this);
     }
-
-
-}
-
 
 
 }

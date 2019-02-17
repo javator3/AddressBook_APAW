@@ -1,14 +1,20 @@
 package pl.sda.addressbook;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import pl.sda.addressbook.model.AddressData;
 import pl.sda.addressbook.view.PersonView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -53,6 +59,15 @@ public class RootController implements Initializable {
 nameCol.setCellValueFactory(n -> n.getValue().nameProperty());
 lastNameCol.setCellValueFactory(l -> l.getValue().lastNameProperty());
 
+    }
+
+    public void loadNewPerson(ActionEvent actionEvent){
+        personView.loadadd();
+    }
+
+
+
+
 
     }
-}
+
