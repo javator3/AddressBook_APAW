@@ -101,14 +101,20 @@ public class RootController implements Initializable {
     }
 
     public void editPerson(ActionEvent actionEvent) {
-//        int index = addressDataTableView.getSelectionModel().getFocusedIndex();
-//        AddressData addressData = addressDataTableView.getSelectionModel().getSelectedItem();
-//        personView.loadPersonEdit(person, index);
-//    }
+
+        int index = addressDataTableView.getSelectionModel().getFocusedIndex();
+        AddressData addressData = addressDataTableView.getSelectionModel().getSelectedItem();
+
+        personView.loadPersonEdit(addressData, index);
+        personView.getAddressData().remove(index);
+
     }
 
     public void deletePerson(ActionEvent actionEvent) {
         int index = addressDataTableView.getSelectionModel().getFocusedIndex();
         personView.getAddressData().remove(index);
     }
+
+
+
 }

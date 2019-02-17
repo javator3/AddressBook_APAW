@@ -101,7 +101,35 @@ public class PersonView {
 
         AddController addController = loader.getController();
         addController.setPersonView1(this);
+
     }
 
 
+    public void loadPersonEdit(AddressData addressData, int index) {
+
+
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/add.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent parent = loader.getRoot();
+
+        newPersonStage = new Stage();
+
+        newPersonStage.setScene(new Scene(parent, 600, 400));
+
+        newPersonStage.show();
+
+        AddController addController = loader.getController();
+        addController.setPersonView1(this);
+        addController.setAddressData(addressData);
+        addController.setIndex(index);
+
+
+
+    }
 }
