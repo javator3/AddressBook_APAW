@@ -1,6 +1,7 @@
 package pl.sda.addressbook;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thoughtworks.qdox.model.expression.Add;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +12,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lombok.Data;
 import pl.sda.addressbook.model.AddressData;
 import pl.sda.addressbook.view.PersonView;
 
@@ -22,7 +25,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-
+@Data
 public class RootController implements Initializable {
 
     @FXML
@@ -61,18 +64,10 @@ public class RootController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String path = "lista.json";
-//        File file = new File(path);
-//        try {
-//            objectMapper.readValue(file, nameCol.setCellValueFactory(n -> n.getValue().nameProperty()));
-//            objectMapper.readValue(file, lastNameCol.setCellValueFactory(n -> n.getValue().nameProperty()));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         nameCol.setCellValueFactory(n -> n.getValue().nameProperty());
         lastNameCol.setCellValueFactory(l -> l.getValue().lastNameProperty());
+
 
     }
 
@@ -81,7 +76,7 @@ public class RootController implements Initializable {
     }
 
 
-    public void saveToJson (ActionEvent actionEvent){
+    public void saveToJson(ActionEvent actionEvent) {
 
         ObjectMapper objectMapper = new ObjectMapper();
         String path = "lista.json";
@@ -93,5 +88,27 @@ public class RootController implements Initializable {
         }
     }
 
-}
+    public void selectedPerson(MouseEvent mouseEvent) {
+        AddressData addressData = addressDataTableView.getSelectionModel().getSelectedItem();
+        System.out.println(addressData);
+        Name.setText(addressData.getName());
+        Lastname.setText(addressData.getLastName());
+        Street.setText(addressData.getStreet());
+        City.setText(addressData.getCity());
+        Postalcode.setText(addressData.getPostalCode());
+        Telephone.setText(addressData.getTelephone());
 
+    }
+
+    public void editPerson(ActionEvent actionEvent) {
+//        int index = addressDataTableView.getSelectionModel().getFocusedIndex();
+//        AddressData addressData = addressDataTableView.getSelectionModel().getSelectedItem();
+//        personView.loadPersonEdit(person, index);
+//    }
+    }
+
+    public void deletePerson(ActionEvent actionEvent) {
+        int index = addressDataTableView.getSelectionModel().getFocusedIndex();
+        personView.getAddressData().remove(index);
+    }
+}

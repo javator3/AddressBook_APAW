@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import pl.sda.addressbook.model.AddressData;
 import pl.sda.addressbook.view.PersonView;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,8 +51,15 @@ public class AddController implements Initializable {
     }
 
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void setCancel(javafx.event.ActionEvent actionEvent) {
+
+        personView.getNewPersonStage().close();
     }
 }

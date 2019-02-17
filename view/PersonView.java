@@ -27,8 +27,13 @@ public class PersonView {
     }
 
     private Stage stage;
+    private Stage newPersonStage;
 
     public PersonView(){}
+
+    public Stage getNewPersonStage() {
+        return newPersonStage;
+    }
 
     public PersonView(Stage stage) {
         this.stage = stage;
@@ -88,10 +93,11 @@ public class PersonView {
         }
         Parent parent = loader.getRoot();
 
-        Stage personStage = new Stage();
-        personStage.setScene(new Scene(parent, 600, 400));
+        newPersonStage = new Stage();
 
-        personStage.show();
+        newPersonStage.setScene(new Scene(parent, 600, 400));
+
+        newPersonStage.show();
 
         AddController addController = loader.getController();
         addController.setPersonView1(this);
