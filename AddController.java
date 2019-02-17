@@ -31,7 +31,7 @@ public class AddController implements Initializable {
 
     private PersonView personView;
 
-    public void setPersonView1 (PersonView personView) {
+    public void setPersonView1(PersonView personView) {
         this.personView = personView;
         Imie.setText("");
         Nazwisko.setText("");
@@ -42,7 +42,7 @@ public class AddController implements Initializable {
     }
 
 
-    public void savePerson(){
+    public void savePerson() {
 
         personView.getAddressData().add(new AddressData(Imie.getText(), Nazwisko.getText(), Ulica.getText(), Miasto.getText(), Kod.getText(), Tel.getText()));
 

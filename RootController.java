@@ -1,5 +1,6 @@
 package pl.sda.addressbook;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import pl.sda.addressbook.model.AddressData;
 import pl.sda.addressbook.view.PersonView;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,25 +51,33 @@ public class RootController implements Initializable {
 
     private PersonView personView;
 
-    public void setPersonView (PersonView personView) {
+    public void setPersonView(PersonView personView) {
         this.personView = personView;
         addressDataTableView.setItems(personView.getAddressData());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-nameCol.setCellValueFactory(n -> n.getValue().nameProperty());
-lastNameCol.setCellValueFactory(l -> l.getValue().lastNameProperty());
+        nameCol.setCellValueFactory(n -> n.getValue().nameProperty());
+        lastNameCol.setCellValueFactory(l -> l.getValue().lastNameProperty());
 
     }
 
-    public void loadNewPerson(ActionEvent actionEvent){
+    public void loadNewPerson(ActionEvent actionEvent) {
         personView.loadadd();
     }
 
 
-
-
-
+    public void saveToJson (ActionEvent actionEvent){
+        ObjectMapper objectMapper = new ObjectMapper();
+        String path = "lista.json";
+        File file = new File(path);
+        try {
+            objectMapper.writeValue(file, personView.getAddressData());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+}
 
