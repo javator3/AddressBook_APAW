@@ -17,7 +17,10 @@ import pl.sda.addressbook.view.PersonView;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RootController implements Initializable {
@@ -58,6 +61,16 @@ public class RootController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String path = "lista.json";
+//        File file = new File(path);
+//        try {
+//            objectMapper.readValue(file, nameCol.setCellValueFactory(n -> n.getValue().nameProperty()));
+//            objectMapper.readValue(file, lastNameCol.setCellValueFactory(n -> n.getValue().nameProperty()));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         nameCol.setCellValueFactory(n -> n.getValue().nameProperty());
         lastNameCol.setCellValueFactory(l -> l.getValue().lastNameProperty());
 
@@ -69,6 +82,7 @@ public class RootController implements Initializable {
 
 
     public void saveToJson (ActionEvent actionEvent){
+
         ObjectMapper objectMapper = new ObjectMapper();
         String path = "lista.json";
         File file = new File(path);

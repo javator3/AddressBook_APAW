@@ -1,5 +1,7 @@
 package pl.sda.addressbook.view;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thoughtworks.qdox.model.expression.Add;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -9,8 +11,12 @@ import javafx.stage.Stage;
 import pl.sda.addressbook.AddController;
 import pl.sda.addressbook.RootController;
 import pl.sda.addressbook.model.AddressData;
+import pl.sda.addressbook.model.AddressJson;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class PersonView {
 
@@ -27,14 +33,29 @@ public class PersonView {
     public PersonView(Stage stage) {
         this.stage = stage;
 
-        addressData.add(new AddressData("Andrzej", "Paw", "Jarużyńska", "Bydgoszcz", "85-732", "509098098"));
-        addressData.add(new AddressData("Marek", "Kal", "Kościuszki", "Toruń", "87-100", "609854345"));
-        addressData.add(new AddressData("Annna", "Mow", "Żeleńskiego", "Gdańsk", "80-172", "432546789"));
-        addressData.add(new AddressData("Beata", "Hou", "Grunwaldzka", "Tczew", "83-432", "334567854"));
-        addressData.add(new AddressData("Darek", "Dal", "Asnyka", "Włocławek", "87-800", "123456789"));
-        addressData.add(new AddressData("Maria", "Gif", "Mickiewicza", "Ciechocinek", "87-200", "334566766"));
-    }
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        String path = "lista.json";
+        File file = new File(path);
+        AddressJson[] addressJsons = null;
+        try {
+            addressJsons = objectMapper.readValue(file, AddressJson[].class);
+           for (AddressJson a: addressJsons){
+               addressData.add(new AddressData(a.getName(), a.getLastName(), a.getStreet(), a.getCity(), a.getPostalCode(), a.getTelephone()));
+           }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        addressData.add(new AddressData("Andrzej", "Paw", "Jarużyńska", "Bydgoszcz", "85-732", "509098098"));
+//        addressData.add(new AddressData("Marek", "Kal", "Kościuszki", "Toruń", "87-100", "609854345"));
+//        addressData.add(new AddressData("Annna", "Mow", "Żeleńskiego", "Gdańsk", "80-172", "432546789"));
+//        addressData.add(new AddressData("Beata", "Hou", "Grunwaldzka", "Tczew", "83-432", "334567854"));
+//        addressData.add(new AddressData("Darek", "Dal", "Asnyka", "Włocławek", "87-800", "123456789"));
+//        addressData.add(new AddressData("Maria", "Gif", "Mickiewicza", "Ciechocinek", "87-200", "334566766"));
+//    }
+    }
 
     public void loadView(){
 

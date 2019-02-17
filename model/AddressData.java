@@ -15,6 +15,7 @@ public class AddressData {
     private StringProperty telephone;
 
 
+
     public AddressData(String name, String lastName, String street, String city, String postalCode, String telephone) {
         this.name = new SimpleStringProperty(name);
         this.lastName = new SimpleStringProperty(lastName);
@@ -23,6 +24,7 @@ public class AddressData {
         this.postalCode = new SimpleStringProperty(postalCode);
         this.telephone = new SimpleStringProperty(telephone);
     }
+
 
     public String getName() {
         return name.get();
